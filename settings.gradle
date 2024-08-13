@@ -1,0 +1,10 @@
+rootProject.name = 'oompa'
+
+include 'oompa-boot-recommend'
+
+include 'oompa-data-lunch'
+
+include 'oompa-cloud-gateway'
+
+
+

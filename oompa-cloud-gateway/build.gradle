@@ -1,0 +1,30 @@
+plugins {
+	id 'org.springframework.boot'
+	id 'io.spring.dependency-management'
+}
+//
+//group = 'com.multi'
+//version = '0.0.1-SNAPSHOT'
+//
+//java {
+//	toolchain {
+//		languageVersion = JavaLanguageVersion.of(17)
+//	}
+//}
+//
+//repositories {
+//	mavenCentral()
+//}
+//tasks.named('test') {
+//	useJUnitPlatform()
+//}
+
+dependencies {
+
+}
+
+
+bootJar {
+	archiveBaseName = 'oompa-cloud-gateway'
+	archiveVersion = '0.0.1-SNAPSHOT'
+}
