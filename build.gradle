@@ -4,6 +4,8 @@ plugins {
     id 'io.spring.dependency-management' version '1.1.6' apply false
 }
 
+//bootJar.enabled = false
+
 
 repositories {
     mavenCentral()
@@ -15,8 +17,6 @@ subprojects {
 
     sourceCompatibility = '17'
     targetCompatibility = '17'
-
-
 
     apply plugin: 'java'
     apply plugin: 'java-library'
@@ -35,11 +35,23 @@ subprojects {
     }
 
 
+    ext {
+        set('springCloudVersion', "2023.0.1")
+    }
+
     // 관리하는 모듈의 공통 dependencies
     dependencies {
         implementation 'org.springframework.boot:spring-boot-starter'
         testImplementation 'org.springframework.boot:spring-boot-starter-test'
         testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+        implementation 'org.springframework.boot:spring-boot-starter-web'
+        implementation 'org.projectlombok:lombok'
+    }
+
+    dependencyManagement {
+        imports {
+            mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+        }
     }
 
     test {
@@ -56,3 +68,5 @@ project(':oompa-data-lunch') {
 project(':oompa-boot-recommend'){}
 
 project(':oompa-cloud-gateway'){}
+
+project(':oompa-cloud-discovery'){}

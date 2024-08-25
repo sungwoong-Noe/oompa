@@ -6,5 +6,6 @@ include 'oompa-data-lunch'
 
 include 'oompa-cloud-gateway'
 
+include 'oompa-cloud-discovery'
 
 
