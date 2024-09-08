@@ -60,13 +60,18 @@ subprojects {
 }
 
 
-project(':oompa-data-lunch') {
-    bootJar{enabled=false}
-    jar{enabled=true}
+//project(':oompa-data-lunch') {
+//    bootJar { enabled = false }
+//    jar { enabled = true }
+//}
+
+project(':oompa-data-article'){
+    bootJar { enabled = false }
+    jar { enabled = true }
+    dependencies {
+        implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+        runtimeOnly 'com.h2database:h2'
+    }
+
 }
 
-project(':oompa-boot-recommend'){}
-
-project(':oompa-cloud-gateway'){}
-
-project(':oompa-cloud-discovery'){}
