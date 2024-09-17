@@ -67,6 +67,11 @@ subprojects {
 }
 
 
+project(':oompa-global') {
+    bootJar.enabled = false
+    jar.enabled = true
+
+}
 
 // 게시글 모듈 설정
 //project(':oompa-data-article'){

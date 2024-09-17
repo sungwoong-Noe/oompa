@@ -9,6 +9,9 @@ rootProject.name = 'oompa'
 //include 'oompa-cloud-discovery'
 
 include 'oompa-data-article'
+include 'oompa-global'
+
+
 //project(':oompa-data-article').projectDir = file('oompa-data-article')
 
 

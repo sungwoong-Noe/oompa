@@ -12,6 +12,10 @@ dependencies {
 
 
     annotationProcessor 'org.projectlombok:lombok'
+
+
+    // oompa-global 유틸 의존성
+    implementation project(':oompa-global')
 }
 
 def querydslSrcDir = 'src/main/generated'
@@ -23,3 +27,4 @@ clean {
 tasks.withType(JavaCompile) {
     options.generatedSourceOutputDirectory = file(querydslSrcDir)
 }
+
