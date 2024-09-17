@@ -1,6 +1,7 @@
 package com.multi.oompadataarticle.domain.article.entity;
 
 import com.multi.oompadataarticle.cmm.jpa.BaseEntity;
+import com.multi.oompadataarticle.cmm.status.ArticleStatus;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -26,11 +27,15 @@ public class ArticleEntity extends BaseEntity {
     @Column(name = "content")
     private String content;
 
+    @Column(name = "status")
+    private ArticleStatus status;
+
 
     @Builder
-    public ArticleEntity(Long idx, String title, String content) {
+    public ArticleEntity(Long idx, String title, String content, ArticleStatus status) {
         this.idx = idx;
         this.title = title;
         this.content = content;
+        this.status = status;
     }
 }

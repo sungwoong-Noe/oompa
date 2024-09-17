@@ -1,24 +1,22 @@
-//plugins {
-//    id 'org.springframework.boot'  // 플러그인 명시적으로 적용
-//    id 'io.spring.dependency-management'
-//}
+bootJar { enabled = true }
+jar { enabled = true }
 
 dependencies {
-//        implementation 'com.querydsl:querydsl-jpa:5.0.0:jakarta'
-//        annotationProcessor "com.querydsl:querydsl-apt:${dependencyManagement.importedProperties['querydsl.version']}:jakarta"
-//        annotationProcessor "jakarta.annotation:jakarta.annotation-api"
-//        annotationProcessor "jakarta.persistence:jakarta.persistence-api"
-//
-//        implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-//        runtimeOnly 'com.h2database:h2'
+    implementation 'com.querydsl:querydsl-jpa:5.0.0:jakarta'
+    annotationProcessor "com.querydsl:querydsl-apt:${dependencyManagement.importedProperties['querydsl.version']}:jakarta"
+    annotationProcessor "jakarta.annotation:jakarta.annotation-api"
+    annotationProcessor "jakarta.persistence:jakarta.persistence-api"
+
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    runtimeOnly 'com.h2database:h2'
 }
 
+def querydslSrcDir = 'src/main/generated'
 
-//def querydslSrcDir = 'src/main/generated'
-//clean {
-//    delete file(querydslSrcDir)
-//}
-//
-//tasks.withType(JavaCompile) {
-//    options.generatedSourceOutputDirectory = file(querydslSrcDir)
-//}
+clean {
+    delete file(querydslSrcDir)
+}
+
+tasks.withType(JavaCompile) {
+    options.generatedSourceOutputDirectory = file(querydslSrcDir)
+}

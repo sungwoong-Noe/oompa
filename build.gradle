@@ -1,3 +1,9 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+}
+
 plugins {
     id 'java'
     id 'org.springframework.boot' version '3.3.2'
@@ -6,7 +12,8 @@ plugins {
 
 
 // main 클래스가 없을 때 사용하는 설정
-bootJar.enabled = false
+bootJar { enabled = false }
+jar { enabled = true }
 
 
 subprojects {
@@ -58,29 +65,29 @@ subprojects {
 
 
 // 게시글 모듈 설정
-project(':oompa-data-article'){
-
-    bootJar { enabled = true }
-    jar { enabled = true }
-
-    dependencies {
-        implementation 'com.querydsl:querydsl-jpa:5.0.0:jakarta'
-        annotationProcessor "com.querydsl:querydsl-apt:${dependencyManagement.importedProperties['querydsl.version']}:jakarta"
-        annotationProcessor "jakarta.annotation:jakarta.annotation-api"
-        annotationProcessor "jakarta.persistence:jakarta.persistence-api"
-
-        implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-        runtimeOnly 'com.h2database:h2'
-    }
-
-    def querydslSrcDir = 'src/main/generated'
-
-    clean {
-        delete file(querydslSrcDir)
-    }
-
-    tasks.withType(JavaCompile) {
-        options.generatedSourceOutputDirectory = file(querydslSrcDir)
-    }
-}
+//project(':oompa-data-article'){
+//
+//    bootJar { enabled = true }
+//    jar { enabled = true }
+//
+//    dependencies {
+//        implementation 'com.querydsl:querydsl-jpa:5.0.0:jakarta'
+//        annotationProcessor "com.querydsl:querydsl-apt:${dependencyManagement.importedProperties['querydsl.version']}:jakarta"
+//        annotationProcessor "jakarta.annotation:jakarta.annotation-api"
+//        annotationProcessor "jakarta.persistence:jakarta.persistence-api"
+//
+//        implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+//        runtimeOnly 'com.h2database:h2'
+//    }
+//
+//    def querydslSrcDir = 'src/main/generated'
+//
+//    clean {
+//        delete file(querydslSrcDir)
+//    }
+//
+//    tasks.withType(JavaCompile) {
+//        options.generatedSourceOutputDirectory = file(querydslSrcDir)
+//    }
+//}
 
