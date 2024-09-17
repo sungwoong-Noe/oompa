@@ -30,7 +30,6 @@ public class ArticleEntity extends BaseEntity {
     @Column(name = "status")
     private ArticleStatus status;
 
-
     @Builder
     public ArticleEntity(Long idx, String title, String content, ArticleStatus status) {
         this.idx = idx;
