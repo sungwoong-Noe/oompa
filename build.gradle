@@ -1,28 +1,32 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+}
+
 plugins {
     id 'java'
-    id 'org.springframework.boot' version '3.3.2' apply false
-    id 'io.spring.dependency-management' version '1.1.6' apply false
+    id 'org.springframework.boot' version '3.3.2'
+    id 'io.spring.dependency-management' version '1.1.6'
 }
 
-//bootJar.enabled = false
 
+// main 클래스가 없을 때 사용하는 설정
+bootJar { enabled = false }
+jar { enabled = true }
 
-repositories {
-    mavenCentral()
-}
 
 subprojects {
+
     group = 'com.multi'
-    version = '1.0-SNAPSHOT'
+    version = '1.0.0-SNAPSHOT'
 
     sourceCompatibility = '17'
     targetCompatibility = '17'
 
     apply plugin: 'java'
-    apply plugin: 'java-library'
     apply plugin: 'org.springframework.boot'
     apply plugin: 'io.spring.dependency-management'
-
 
     configurations {
         compileOnly {
@@ -33,7 +37,6 @@ subprojects {
     repositories {
         mavenCentral()
     }
-
 
     ext {
         set('springCloudVersion', "2023.0.1")
@@ -46,6 +49,10 @@ subprojects {
         testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
         implementation 'org.springframework.boot:spring-boot-starter-web'
         implementation 'org.projectlombok:lombok'
+
+
+        annotationProcessor('org.projectlombok:lombok')
+        testAnnotationProcessor('org.projectlombok:lombok')
     }
 
     dependencyManagement {
@@ -60,13 +67,36 @@ subprojects {
 }
 
 
-project(':oompa-data-lunch') {
-    bootJar{enabled=false}
-    jar{enabled=true}
+project(':oompa-global') {
+    bootJar.enabled = false
+    jar.enabled = true
+
 }
 
-project(':oompa-boot-recommend'){}
+// 게시글 모듈 설정
+//project(':oompa-data-article'){
+//
+//    bootJar { enabled = true }
+//    jar { enabled = true }
+//
+//    dependencies {
+//        implementation 'com.querydsl:querydsl-jpa:5.0.0:jakarta'
+//        annotationProcessor "com.querydsl:querydsl-apt:${dependencyManagement.importedProperties['querydsl.version']}:jakarta"
+//        annotationProcessor "jakarta.annotation:jakarta.annotation-api"
+//        annotationProcessor "jakarta.persistence:jakarta.persistence-api"
+//
+//        implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+//        runtimeOnly 'com.h2database:h2'
+//    }
+//
+//    def querydslSrcDir = 'src/main/generated'
+//
+//    clean {
+//        delete file(querydslSrcDir)
+//    }
+//
+//    tasks.withType(JavaCompile) {
+//        options.generatedSourceOutputDirectory = file(querydslSrcDir)
+//    }
+//}
 
-project(':oompa-cloud-gateway'){}
-
-project(':oompa-cloud-discovery'){}

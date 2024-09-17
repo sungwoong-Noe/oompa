@@ -1,11 +1,18 @@
 rootProject.name = 'oompa'
 
-include 'oompa-boot-recommend'
+//include 'oompa-boot-recommend'
 
-include 'oompa-data-lunch'
+//include 'oompa-data-lunch'
 
-include 'oompa-cloud-gateway'
+//include 'oompa-cloud-gateway'
 
-include 'oompa-cloud-discovery'
+//include 'oompa-cloud-discovery'
+
+include 'oompa-data-article'
+include 'oompa-global'
+
+
+//project(':oompa-data-article').projectDir = file('oompa-data-article')
+
 
 
