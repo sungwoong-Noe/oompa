@@ -5,7 +5,7 @@ import lombok.Getter;
 @Getter
 public enum ArticleStatus {
 
-    SAVED("saved"),
+    COMPLETE_SAVED("complete_saved"),
     TEMP_SAVED("temp_saved")
     ;
 

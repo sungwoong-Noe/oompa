@@ -37,4 +37,13 @@ public class ArticleEntity extends BaseEntity {
         this.content = content;
         this.status = status;
     }
+
+
+    public void articleUpdate(String title, String content, ArticleStatus status) {
+
+        this.title = title;
+        this.content = content;
+        this.status = status;
+
+    }
 }
