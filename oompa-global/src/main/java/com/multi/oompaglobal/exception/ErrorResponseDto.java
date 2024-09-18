@@ -29,7 +29,7 @@ public class ErrorResponseDto {
                 .build();
     }
 
-    private static ErrorResponseDto ofBindingError(String errorCode, BindingResult bindingResult) {
+    public static ErrorResponseDto ofBindingError(String errorCode, BindingResult bindingResult) {
 
         return ErrorResponseDto.builder()
                 .errorCode(errorCode)

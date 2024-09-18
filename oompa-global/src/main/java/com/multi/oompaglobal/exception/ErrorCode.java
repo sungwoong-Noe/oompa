@@ -2,6 +2,7 @@ package com.multi.oompaglobal.exception;
 
 import lombok.Getter;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 
 @Getter
 public enum ErrorCode {
@@ -23,7 +24,11 @@ public enum ErrorCode {
     MEMBER_NOT_EXISTS(HttpStatus.BAD_REQUEST, "M-003", "해당 회원은 존재하지 않습니다"),
 
     //Tier
-    DB_SAVE_FAILED(HttpStatus.INTERNAL_SERVER_ERROR, "DB-001", "Tier 저장에 실패하였습니다.");
+    DB_SAVE_FAILED(HttpStatus.INTERNAL_SERVER_ERROR, "DB-001", "Tier 저장에 실패하였습니다."),
+
+    INTERNAL_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "500", "잘못된 요청입니다."),
+    METHOD_ARGUMENT_NOT_VALID_EXCEPTION(HttpStatus.BAD_REQUEST, "400", "요청 정보가 올바르지 않습니다."),
+    ;
 
     ErrorCode(HttpStatus httpStatus, String errorCode, String message) {
         this.httpStatus = httpStatus;
