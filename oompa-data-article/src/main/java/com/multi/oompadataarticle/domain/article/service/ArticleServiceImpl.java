@@ -2,7 +2,7 @@ package com.multi.oompadataarticle.domain.article.service;
 
 import com.multi.oompadataarticle.cmm.status.ArticleStatus;
 import com.multi.oompadataarticle.domain.article.entity.ArticleEntity;
-import com.multi.oompadataarticle.domain.article.model.ArticleRequestDto;
+import com.multi.oompadataarticle.domain.article.model.ArticleReqDto;
 import com.multi.oompadataarticle.domain.article.repo.ArticleRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -20,7 +20,17 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     @Transactional
-    public void temporarySave(ArticleRequestDto requestDto) {
+    public Long create(ArticleReqDto reqDto) {
+
+        ArticleEntity result = articleRepository.save(reqDto.toEntity());
+
+        return result.getIdx();
+    }
+
+
+    @Override
+    @Transactional
+    public void temporarySave(ArticleReqDto requestDto) {
 
         log.info("게시글 임시 저장 요청 => {}", requestDto.getTitle());
 
@@ -40,7 +50,7 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     @Transactional
-    public void completeSave(ArticleRequestDto requestDto) {
+    public void completeSave(ArticleReqDto requestDto) {
 
         log.info("게시글 완전 저장 요청 => {}", requestDto.getTitle());
 
