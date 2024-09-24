@@ -16,7 +16,8 @@ public class ArticleController {
     private final ArticleService articleService;
 
     @PostMapping("/article")
-    public ResponseDto<Object> create(@RequestBody ArticleReqDto reqDto) {
+    public ResponseDto<Long> create(@RequestBody ArticleReqDto reqDto) {
+
         Long articleIdx = articleService.create(reqDto);
 
         return ResponseDto.success(articleIdx);

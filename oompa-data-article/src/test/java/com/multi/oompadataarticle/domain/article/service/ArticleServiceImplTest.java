@@ -45,6 +45,8 @@ public class ArticleServiceImplTest {
         when(articleRepository.findById(requestDto.getIdx())).thenReturn(Optional.empty());
 
         articleService.temporarySave(requestDto);
-
     }
+
+
+
 }

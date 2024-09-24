@@ -19,7 +19,6 @@ public class GlobalException {
                 .of(ErrorCode.INTERNAL_SERVER_ERROR.getErrorCode(), ErrorCode.INTERNAL_SERVER_ERROR.getMessage());
     }
 
-
     // 요청 값의 검증이 실패했을 경우 여기서 예외를 처리한다.
     @ExceptionHandler(value = MethodArgumentNotValidException.class)
     public ErrorResponseDto methodArgumentNotValidException(MethodArgumentNotValidException e) {
@@ -27,4 +26,12 @@ public class GlobalException {
                 .ofBindingError(ErrorCode.METHOD_ARGUMENT_NOT_VALID_EXCEPTION.getErrorCode(), e.getBindingResult());
 
     }
+
+    @ExceptionHandler(value = IllegalArgumentException.class)
+    public ErrorResponseDto illegalArgumentException(IllegalArgumentException e) {
+
+        return ErrorResponseDto.of(ErrorCode.INTERNAL_SERVER_ERROR.getErrorCode(), e.getMessage());
+
+    }
+
 }
