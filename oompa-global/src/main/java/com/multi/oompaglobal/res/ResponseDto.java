@@ -33,4 +33,14 @@ public class ResponseDto<T> {
 
     }
 
+    public static <T> ResponseDto<T> success(T content) {
+
+        return ResponseDto.<T>builder()
+                .code(HttpStatus.OK.value())
+                .status(HttpStatus.OK)
+                .content(content)
+                .build();
+
+    }
+
 }
