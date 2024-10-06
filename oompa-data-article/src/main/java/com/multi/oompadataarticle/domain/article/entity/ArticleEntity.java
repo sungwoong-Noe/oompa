@@ -19,10 +19,8 @@ public class ArticleEntity extends BaseEntity {
     @Column(name = "article_idx")
     private Long idx;
 
-
     @Column(name = "title")
     private String title;
-
 
     @Column(name = "content")
     private String content;

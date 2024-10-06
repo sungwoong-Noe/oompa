@@ -1,9 +1,11 @@
 package com.multi.oompadataarticle.cmm.jpa;
 
 
+import com.multi.oompadataarticle.cmm.convert.BooleanAttributeConverter;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.val;
+import org.hibernate.annotations.ColumnDefault;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
@@ -20,8 +22,11 @@ public abstract class BaseEntity {
     @Column(name = "modified_time")
     private String modifiedTime;
 
-    @Column(name = "del_yn")
+    @Column(name = "del_yn", nullable = false, columnDefinition = "TINYINT", length = 1)
+    @Convert(converter = BooleanAttributeConverter.class)
+    @ColumnDefault("0")
     private boolean delYn;
+
 
     @PrePersist
     public void prePersist() {

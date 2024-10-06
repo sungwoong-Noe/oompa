@@ -11,7 +11,6 @@ public enum ArticleStatus {
     TEMP_SAVED("temp_saved")
     ;
 
-
     private final String status;
 
     public static ArticleStatus of(String codeStr) {
