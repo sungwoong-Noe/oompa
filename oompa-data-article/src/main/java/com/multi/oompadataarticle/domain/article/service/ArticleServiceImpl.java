@@ -3,11 +3,16 @@ package com.multi.oompadataarticle.domain.article.service;
 import com.multi.oompadataarticle.cmm.status.ArticleStatus;
 import com.multi.oompadataarticle.domain.article.entity.ArticleEntity;
 import com.multi.oompadataarticle.domain.article.model.ArticleReqDto;
+import com.multi.oompadataarticle.domain.article.model.ArticleResDto;
 import com.multi.oompadataarticle.domain.article.repo.ArticleRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+
+import static com.multi.oompadataarticle.cmm.status.ArticleStatus.COMPLETE_SAVED;
 
 @Service
 @Slf4j
@@ -29,47 +34,12 @@ public class ArticleServiceImpl implements ArticleService {
 
 
     @Override
-    @Transactional
-    public void temporarySave(ArticleReqDto requestDto) {
-
-        log.info("게시글 임시 저장 요청 => {}", requestDto.getTitle());
-
-        ArticleEntity articleEntity = articleRepository.findById(requestDto.getIdx())
-                .orElse(
-                        ArticleEntity.builder()
-                                .title(requestDto.getTitle())
-                                .content(requestDto.getContent())
-                                .status(ArticleStatus.TEMP_SAVED)
-                                .build()
-                );
-
-        articleRepository.save(articleEntity);
-
-        log.info("게시글 임시 저장 완료 => {}", requestDto.getTitle());
-    }
-
-    @Override
-    @Transactional
-    public void completeSave(ArticleReqDto requestDto) {
-
-        log.info("게시글 완전 저장 요청 => {}", requestDto.getTitle());
-
-        ArticleEntity articleEntity = articleRepository.findById(requestDto.getIdx())
-                .orElse(
-                    ArticleEntity.builder()
-                            .title(requestDto.getTitle())
-                            .content(requestDto.getContent())
-                            .status(ArticleStatus.TEMP_SAVED)
-                            .build()
-                );
+    public List<ArticleResDto> retrieve() {
 
 
-        if (articleEntity.getStatus().equals(ArticleStatus.TEMP_SAVED)) {
-            articleEntity.articleUpdate(requestDto.getTitle(), requestDto.getContent(), ArticleStatus.COMPLETE_SAVED);
-        }
+        List<ArticleEntity> articles = articleRepository.findByStatus(COMPLETE_SAVED.getStatus());
 
-        articleRepository.save(articleEntity);
+        return articles.stream().map(ArticleResDto::ofEntity).toList();
 
-        log.info("게시글 완전 저장 완료 => {}", requestDto.getTitle());
     }
 }

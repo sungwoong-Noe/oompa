@@ -1,6 +1,9 @@
 package com.multi.oompadataarticle.domain.article.service;
 
 import com.multi.oompadataarticle.domain.article.model.ArticleReqDto;
+import com.multi.oompadataarticle.domain.article.model.ArticleResDto;
+
+import java.util.List;
 
 public interface ArticleService {
 
@@ -10,25 +13,6 @@ public interface ArticleService {
      */
     Long create(ArticleReqDto reqDto);
 
-
-    /**
-     * 임시 저장
-     */
-    void temporarySave(ArticleReqDto requestDto);
-
-
-    /**
-     * 완전 저장
-     */
-    void completeSave(ArticleReqDto requestDto);
-
-
-
-
-
-
-
-
-
+    List<ArticleResDto> retrieve();
 
 }

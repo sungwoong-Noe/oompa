@@ -16,11 +16,11 @@ public class ArticleReqDto {
 
     private String content;
 
-    private ArticleStatus status;
+    private String status;
 
 
     @Builder
-    public ArticleReqDto(Long idx, String title, String content, ArticleStatus status) {
+    public ArticleReqDto(Long idx, String title, String content, String status) {
         this.idx = idx;
         this.title = title;
         this.content = content;

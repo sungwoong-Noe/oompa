@@ -26,10 +26,10 @@ public class ArticleEntity extends BaseEntity {
     private String content;
 
     @Column(name = "status")
-    private ArticleStatus status;
+    private String status;
 
     @Builder
-    public ArticleEntity(Long idx, String title, String content, ArticleStatus status) {
+    public ArticleEntity(Long idx, String title, String content, String status) {
         this.idx = idx;
         this.title = title;
         this.content = content;
@@ -37,7 +37,7 @@ public class ArticleEntity extends BaseEntity {
     }
 
 
-    public void articleUpdate(String title, String content, ArticleStatus status) {
+    public void articleUpdate(String title, String content, String status) {
 
         this.title = title;
         this.content = content;
