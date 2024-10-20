@@ -77,7 +77,7 @@ class ArticleControllerTest {
         ArticleEntity article = ArticleEntity.builder()
                 .title("title")
                 .content("content")
-                .status(ArticleStatus.COMPLETE_SAVED)
+                .status(ArticleStatus.COMPLETE_SAVED.getStatus())
                 .build();
 
         articleRepository.saveAndFlush(article);
