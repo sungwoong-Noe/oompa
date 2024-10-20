@@ -1,7 +1,7 @@
 package com.multi.oompadataarticle.domain.article.service;
 
 import com.multi.oompadataarticle.domain.article.entity.ArticleEntity;
-import com.multi.oompadataarticle.domain.article.model.ArticleRequestDto;
+import com.multi.oompadataarticle.domain.article.model.ArticleReqDto;
 import com.multi.oompadataarticle.domain.article.repo.ArticleRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -30,7 +30,7 @@ public class ArticleServiceImplTest {
     @DisplayName("게시글 - 임시 저장(새로 저장되는 경우)")
     public void temporary_save() {
         //given
-        ArticleRequestDto requestDto = ArticleRequestDto.builder()
+        ArticleReqDto requestDto = ArticleReqDto.builder()
                 .title("title_1")
                 .content("<p>content</p>")
                 .build();
@@ -45,7 +45,8 @@ public class ArticleServiceImplTest {
         when(articleRepository.findById(requestDto.getIdx())).thenReturn(Optional.empty());
 
         articleService.temporarySave(requestDto);
-
     }
+
+
 
 }

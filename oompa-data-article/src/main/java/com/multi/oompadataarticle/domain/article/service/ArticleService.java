@@ -1,26 +1,18 @@
 package com.multi.oompadataarticle.domain.article.service;
 
-import com.multi.oompadataarticle.domain.article.model.ArticleRequestDto;
+import com.multi.oompadataarticle.domain.article.model.ArticleReqDto;
+import com.multi.oompadataarticle.domain.article.model.ArticleResDto;
+
+import java.util.List;
 
 public interface ArticleService {
 
-    /**
-     * 임시 저장
-     */
-    void temporarySave(ArticleRequestDto requestDto);
-
 
     /**
-     * 완전 저장
+     * 게시글 저장
      */
-    void completeSave(ArticleRequestDto requestDto);
+    Long create(ArticleReqDto reqDto);
 
-
-
-
-
-
-
-
+    List<ArticleResDto> retrieve();
 
 }
