@@ -30,6 +30,7 @@ class ArticleRepositoryTest {
 
     @BeforeEach
     public void before() {
+        articleRepository.deleteAll();
         em.clear();
     }
 
@@ -40,7 +41,7 @@ class ArticleRepositoryTest {
 
         //given
         ArticleEntity article = ArticleEntity.builder()
-                .status(ArticleStatus.TEMP_SAVED)
+                .status(ArticleStatus.TEMP_SAVED.getStatus())
                 .title("article1")
                 .content("<p>article content2</p>")
                 .build();
@@ -61,7 +62,7 @@ class ArticleRepositoryTest {
 
         //given
         ArticleEntity article = ArticleEntity.builder()
-                .status(ArticleStatus.TEMP_SAVED)
+                .status(ArticleStatus.TEMP_SAVED.getStatus())
                 .title("article1")
                 .content("<p>article content2</p>")
                 .build();
@@ -72,7 +73,7 @@ class ArticleRepositoryTest {
         //when
         ArticleEntity updateArticle = ArticleEntity.builder()
                 .idx(1L)
-                .status(ArticleStatus.TEMP_SAVED)
+                .status(ArticleStatus.TEMP_SAVED.getStatus())
                 .title("article1_update")
                 .content("<p>article content2</p>")
                 .build();

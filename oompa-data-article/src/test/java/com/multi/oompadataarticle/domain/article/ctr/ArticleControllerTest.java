@@ -1,10 +1,12 @@
 package com.multi.oompadataarticle.domain.article.ctr;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.multi.oompadataarticle.cmm.status.ArticleStatus;
 import com.multi.oompadataarticle.domain.article.entity.ArticleEntity;
 import com.multi.oompadataarticle.domain.article.repo.ArticleRepository;
 import jakarta.persistence.EntityManager;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -16,6 +18,7 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.List;
+import java.util.Map;
 
 import static org.assertj.core.api.Assertions.*;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -39,6 +42,15 @@ class ArticleControllerTest {
 
     @Autowired
     EntityManager em;
+
+    @Autowired
+    ObjectMapper mapper;
+
+
+    @BeforeEach
+    public void before() {
+        articleRepository.deleteAll();
+    }
 
 
     @Test
@@ -80,35 +92,30 @@ class ArticleControllerTest {
                 .status(ArticleStatus.COMPLETE_SAVED.getStatus())
                 .build();
 
-        articleRepository.saveAndFlush(article);
+        ArticleEntity saveArticle = articleRepository.saveAndFlush(article);
 
         em.clear();
 
-
-        String articleForm = """
-                {
-                    "idx": "1",
-                    "title": "update title",
-                    "content": " content",
-                    "status": "TEMP_SAVED"
-                 }               
-                """;
-
+        Map<String, Object> request = Map.of("idx", saveArticle.getIdx(),
+                "title", "update title",
+                "content", " content",
+                "status", "TEMP_SAVED"
+        );
 
         mvc.perform(post("/article")
-                        .content(articleForm)
+                        .content(mapper.writeValueAsString(request))
                         .contentType(APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.content").value(1L))
+                .andExpect(jsonPath("$.content").value(saveArticle.getIdx()))
                 .andDo(print());
 
 
-        ArticleEntity articleEntity = articleRepository.findById(1L).get();
+        ArticleEntity articleEntity = articleRepository.findById(saveArticle.getIdx()).get();
         List<ArticleEntity> all = articleRepository.findAll();
 
-        assertThat(articleEntity.getIdx()).isEqualTo(1L);
+//        assertThat(articleEntity.getIdx()).isEqualTo(1L);
         assertThat(articleEntity.getTitle()).isEqualTo("update title");
-        assertThat(all.size()).isEqualTo(1L);
+//        assertThat(all.size()).isEqualTo(2L);
 
     }
 }

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 import static com.multi.oompadataarticle.cmm.status.ArticleStatus.COMPLETE_SAVED;
 
@@ -27,7 +28,14 @@ public class ArticleServiceImpl implements ArticleService {
     @Transactional
     public Long create(ArticleReqDto reqDto) {
 
-        ArticleEntity result = articleRepository.save(reqDto.toEntity());
+        ArticleEntity result;
+
+        if (reqDto.getIdx() == null) {
+            result = articleRepository.save(reqDto.toEntity());
+        } else {
+            result = articleRepository.findById(reqDto.getIdx()).orElseThrow(() -> new IllegalArgumentException("게시글을 찾지 못했습니다."));
+            result.articleUpdate(reqDto.getTitle(), reqDto.getContent(), reqDto.getStatus());
+        }
 
         return result.getIdx();
     }

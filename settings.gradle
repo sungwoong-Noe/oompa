@@ -9,6 +9,7 @@ rootProject.name = 'oompa'
 //include 'oompa-cloud-discovery'
 
 include 'oompa-data-article'
+include 'oompa-data-lunch'
 include 'oompa-global'
 
 
