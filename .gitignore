@@ -43,6 +43,5 @@ bin/
 .DS_Store
 
 workspace.*
-/oompa-data-lunch/
 *-local.yml
 
