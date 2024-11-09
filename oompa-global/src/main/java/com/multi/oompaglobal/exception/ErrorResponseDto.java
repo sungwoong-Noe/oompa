@@ -17,6 +17,7 @@ public class ErrorResponseDto {
 
     @Builder
     public ErrorResponseDto(String errorCode, String errorMessage) {
+
         this.errorCode = errorCode;
         this.errorMessage = errorMessage;
     }

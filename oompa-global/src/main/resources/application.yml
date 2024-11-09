@@ -1,3 +1,7 @@
 spring:
   application:
     name: oompa-global
+
+jasypt:
+  encryptor:
+    password: lunch
